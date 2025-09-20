@@ -1,0 +1,6 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+pytest
+# add any others actually used in the src or notebooks

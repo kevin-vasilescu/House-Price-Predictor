@@ -1,0 +1,129 @@
+base:
+  random_state: 42
+  target_col: 'SalePrice'
+  log_target: True
+
+features:
+  numerical:
+    - 'LotFrontage'
+    - 'LotArea'
+    - 'OverallQual'
+    - 'OverallCond'
+    - 'YearBuilt'
+    - 'YearRemodAdd'
+    - 'MasVnrArea'
+    - 'BsmtFinSF1'
+    - 'BsmtFinSF2'
+    - 'BsmtUnfSF'
+    - 'TotalBsmtSF'
+    - '1stFlrSF'
+    - '2ndFlrSF'
+    - 'LowQualFinSF'
+    - 'GrLivArea'
+    - 'BsmtFullBath'
+    - 'BsmtHalfBath'
+    - 'FullBath'
+    - 'HalfBath'
+    - 'BedroomAbvGr'
+    - 'KitchenAbvGr'
+    - 'TotRmsAbvGrd'
+    - 'Fireplaces'
+    - 'GarageYrBlt'
+    - 'GarageCars'
+    - 'GarageArea'
+    - 'WoodDeckSF'
+    - 'OpenPorchSF'
+    - 'EnclosedPorch'
+    - '3SsnPorch'
+    - 'ScreenPorch'
+    - 'PoolArea'
+    - 'MiscVal'
+    - 'MoSold'
+    - 'YrSold'
+  
+  categorical:
+    nominal:
+      - 'MSZoning'
+      - 'Street'
+      - 'Alley'
+      - 'LotShape'
+      - 'LandContour'
+      - 'Utilities'
+      - 'LotConfig'
+      - 'LandSlope'
+      - 'Neighborhood'
+      - 'Condition1'
+      - 'Condition2'
+      - 'BldgType'
+      - 'HouseStyle'
+      - 'RoofStyle'
+      - 'RoofMatl'
+      - 'Exterior1st'
+      - 'Exterior2nd'
+      - 'MasVnrType'
+      - 'Foundation'
+      - 'Heating'
+      - 'CentralAir'
+      - 'Electrical'
+      - 'Functional'
+      - 'GarageType'
+      - 'GarageFinish'
+      - 'PavedDrive'
+      - 'MiscFeature'
+      - 'SaleType'
+      - 'SaleCondition'
+    
+    ordinal:
+      - 'ExterQual'
+      - 'ExterCond'
+      - 'BsmtQual'
+      - 'BsmtCond'
+      - 'BsmtExposure'
+      - 'BsmtFinType1'
+      - 'BsmtFinType2'
+      - 'HeatingQC'
+      - 'KitchenQual'
+      - 'FireplaceQu'
+      - 'GarageQual'
+      - 'GarageCond'
+      - 'PoolQC'
+      - 'Fence'
+
+    ordinal_mappings:
+      ExterQual: ['Po', 'Fa', 'TA', 'Gd', 'Ex']
+      ExterCond: ['Po', 'Fa', 'TA', 'Gd', 'Ex']
+      BsmtQual: ['Missing', 'Po', 'Fa', 'TA', 'Gd', 'Ex']
+      BsmtCond: ['Missing', 'Po', 'Fa', 'TA', 'Gd', 'Ex']
+      BsmtExposure: ['Missing', 'No', 'Mn', 'Av', 'Gd']
+      BsmtFinType1: ['Missing', 'Unf', 'LwQ', 'Rec', 'BLQ', 'ALQ', 'GLQ']
+      BsmtFinType2: ['Missing', 'Unf', 'LwQ', 'Rec', 'BLQ', 'ALQ', 'GLQ']
+      HeatingQC: ['Po', 'Fa', 'TA', 'Gd', 'Ex']
+      KitchenQual: ['Po', 'Fa', 'TA', 'Gd', 'Ex']
+      FireplaceQu: ['Missing', 'Po', 'Fa', 'TA', 'Gd', 'Ex']
+      GarageQual: ['Missing', 'Po', 'Fa', 'TA', 'Gd', 'Ex']
+      GarageCond: ['Missing', 'Po', 'Fa', 'TA', 'Gd', 'Ex']
+      PoolQC: ['Missing', 'Fa', 'TA', 'Gd', 'Ex']
+      Fence: ['Missing', 'MnWw', 'GdWo', 'MnPrv', 'GdPrv']
+
+  drop:
+    - 'Id'
+
+models:
+  xgboost:
+    params:
+      objective: 'reg:squarederror'
+      n_estimators: 1000
+      learning_rate: 0.05
+      max_depth: 3
+      subsample: 0.7
+      colsample_bytree: 0.7
+      random_state: 42
+      n_jobs: -1
+
+  neural_network:
+    layers: [128, 64]
+    dropout_rates: [0.3, 0.3]
+    learning_rate: 0.001
+    batch_size: 32
+    epochs: 200
+    patience: 15
